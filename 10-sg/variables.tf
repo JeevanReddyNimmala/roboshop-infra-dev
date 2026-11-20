@@ -15,7 +15,7 @@ variable "environment" {
   
 # }
 
-variable "sg_name" {
+variable "sg_names" {
   default = [
     "mongodb","redis","mysql","rabittmq",
     "catalogue","user","shipping","payment","cart",
