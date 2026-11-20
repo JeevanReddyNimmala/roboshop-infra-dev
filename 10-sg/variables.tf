@@ -17,7 +17,7 @@ variable "environment" {
 
 variable "sg_names" {
   default = [
-    "mongodb","redis","mysql","rabittmq",
+    "mongodb","redis","mysql","rabbitmq",
     "catalogue","user","shipping","payment","cart",
     "backend_alb",
     "fronend",
