@@ -12,5 +12,5 @@ module "sg" {
   project = var.project
   environment = var.environment
   sg_name = replace(var.sg_name[count.index],"_","-")
-  vpc_id = locals.vpc_id
+  vpc_id = locals.vpc_id.value
 }
