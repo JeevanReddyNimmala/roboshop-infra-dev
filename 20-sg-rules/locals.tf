@@ -12,5 +12,6 @@ locals {
   frontend_alb_sg_id = data.aws_ssm_parameter.frontend_alb_sg_id.value
   backend_alb_sg_id = data.aws_ssm_parameter.backend_alb_sg_id.value
   bastion_sg_id = data.aws_ssm_parameter.bastion_sg_id.value
-  vpn-sg-id = data.aws_ssm_parameter.vpn_sg_id.value   
+  vpn-sg-id = data.aws_ssm_parameter.vpn_sg_id.value
+  #my_ip = data.http.my_ipv4.value   
 }
