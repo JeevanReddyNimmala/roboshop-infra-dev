@@ -2,6 +2,6 @@ resource "aws_instance" "mongodb" {
   ami                    = local.ami_id
   instance_type          = "t3.micro"
   subnet_id              = local.database_subnet_id
-   vpc_security_group_ids = local.mongodb_sg_id
-   tags = local.common_tags
+  vpc_security_group_ids = local.mongodb_sg_id
+  tags = local.common_tags
 }
