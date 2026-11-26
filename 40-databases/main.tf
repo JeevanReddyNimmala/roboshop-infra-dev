@@ -5,3 +5,29 @@ resource "aws_instance" "mongodb" {
   vpc_security_group_ids = local.mongodb_sg_id
   tags = local.common_tags
 }
+
+resource "terraform_data" "bootstrap" {
+  # Re-triggers the provisioner whenever the file hash or timestamp changes
+  triggers_replace = [
+    aws_instance.mongodb.id
+  ]
+
+  connection {
+    type = "ssh"
+    user = "ec2-user"
+    password = "DevOps321"
+    host = self.public_ip
+  }
+  
+  provisioner "file" {
+  source      = "${path.module}bootstrap.sh"
+  destination = "/tmp/bootstrap.sh"
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "chmod +x /tmp/bootstrap.sh",
+      "sudo sh /tmp/bootstrap.sh"
+    ]
+  }
+}
