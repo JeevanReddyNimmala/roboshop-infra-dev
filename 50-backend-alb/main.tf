@@ -3,7 +3,7 @@ resource "aws_lb" "backend" {
   internal           = true
   load_balancer_type = "application"
   security_groups    = local.backend_alb_sg_id
-  subnets            = [local.private_subnet_ids]
+  subnets            = local.private_subnet_ids
 
   enable_deletion_protection = false # it should be true in real time
 
@@ -33,7 +33,7 @@ resource "aws_lb_listener" "http" {
 
 resource "aws_route53_record" "backend_alb" {
   zone_id = var.zone_id
-  name    = "*.backend-alb-${var.environment}-${var.domain_name}"
+  name    = "*.backend-alb-${var.environment}.${var.domain_name}"
   type    = "A"
 
   alias {
