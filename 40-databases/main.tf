@@ -138,7 +138,7 @@ resource "terraform_data" "rabbitmq" {
     type = "ssh"
     user = "ec2-user"
     password = "DevOps321"
-    host = aws_instance.mysql.private_dns
+    host = aws_instance.rabbitmq.private_dns
   }
   
   provisioner "file" {
