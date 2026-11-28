@@ -45,8 +45,8 @@ resource "aws_iam_instance_profile" "mysql" {
   role = aws_iam_role.mysql.name
 }
 
-resource "aws_iam_role" "mysql" {
-  name               = "${var.project}-${var.environment}-mysql"
+resource "aws_iam_role" "rabbitmq" {
+  name               = "${var.project}-${var.environment}-rabbitmq"
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
