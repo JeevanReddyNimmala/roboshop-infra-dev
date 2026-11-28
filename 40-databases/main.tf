@@ -72,3 +72,44 @@ provisioner "remote-exec" {
 }
 
 }
+
+resource "aws_instance" "mysql" {
+  ami                    = local.ami_id
+  instance_type          = "t3.micro"
+  subnet_id              = local.database_subnet_id
+  vpc_security_group_ids = local.mysql_sg_id
+  iam_instance_profile = aws_iam_instance_profile.bastion.name
+  tags = merge(
+    local.common_tags,
+    {
+      Name = "${var.project}-${var.environment}-mysql"
+    }
+  )
+}
+
+resource "terraform_data" "mysql" {
+  # Re-triggers the provisioner whenever the file hash or timestamp changes
+  triggers_replace = [
+    aws_instance.mysql.id
+  ]
+
+  connection {
+    type = "ssh"
+    user = "ec2-user"
+    password = "DevOps321"
+    host = aws_instance.mysql.private_dns
+  }
+  
+  provisioner "file" {
+  source      = "${path.module}/bootstrap.sh"
+  destination = "/tmp/bootstrap.sh"
+  }
+
+provisioner "remote-exec" {
+  inline = [
+    "chmod +x /tmp/bootstrap.sh",
+    "sudo bash /tmp/bootstrap.sh mysql ${var.environment}"
+  ]
+}
+
+}
