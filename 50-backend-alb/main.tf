@@ -8,7 +8,7 @@ resource "aws_lb" "backend" {
   enable_deletion_protection = false # it should be true in real time
 
     tags = merge(
-        local.common_name
+        local.common_name,
     {
         Name = "${local.common_name}-backend"
     }
