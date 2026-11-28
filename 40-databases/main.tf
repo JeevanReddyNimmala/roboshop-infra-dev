@@ -3,7 +3,12 @@ resource "aws_instance" "mongodb" {
   instance_type          = "t3.micro"
   subnet_id              = local.database_subnet_id
   vpc_security_group_ids = local.mongodb_sg_id
-  tags = local.common_tags
+   tags = merge(
+    local.common_tags,
+    {
+      Name = "${var.project}-${var.environment}-mongodb"
+    }
+  )
 }
 
 resource "terraform_data" "bootstrap" {
