@@ -1,20 +1,20 @@
 {
+    "Version": "2012-10-17",
     "Statement": [
         {
-            "Action": "ssm:GetParameter",
+            "Sid": "VisualEditor0",
             "Effect": "Allow",
+            "Action": "ssm:GetParameter",
             "Resource": [
-                "arn:aws:ssm:us-east-1:694463832840:parameter/roboshop/dev/rabbitmq_password",
-                "arn:aws:ssm:us-east-1:694463832840:parameter/roboshop/dev/rabbitmq_user"
-            ],
-            "Sid": "VisualEditor0"
+                "arn:aws:ssm:us-east-1:${account_id}:parameter/${project}/${environment}/rabbitmq_user",
+                "arn:aws:ssm:us-east-1:${account_id}:parameter/${project}/${environment}/rabbitmq_password"
+            ]
         },
         {
-            "Action": "ssm:DescribeParameters",
+            "Sid": "VisualEditor1",
             "Effect": "Allow",
-            "Resource": "*",
-            "Sid": "VisualEditor1"
+            "Action": "ssm:DescribeParameters",
+            "Resource": "*"
         }
-    ],
-    "Version": "2012-10-17"
+    ]
 }
