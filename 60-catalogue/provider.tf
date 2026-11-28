@@ -9,7 +9,7 @@ terraform {
 
   	backend "s3" {
     	bucket         = "remote-tf-state-jsr-dev"
-    	key            = "backend-alb.tfstate"
+    	key            = "catalogue.tfstate"
     	region         = "us-east-1"
     	encrypt        = true
 		use_lockfile = true
